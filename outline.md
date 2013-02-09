@@ -54,6 +54,7 @@ Note: Make sure that I have an empty Sublime window open in case someone asks a 
     * Writing tests beforehand forces you to think through how you want your code to behave before you start writing it.
     * Leads to better code design by encouraging smaller pieces of code which you can combine to achieve your larger goals.
     * Means that you know you wrote the tests correctly. If you didn't see the tests fail, you're not actually sure that they *will* fail.
+    * Your tests will be more complete, because you at each step you only write the code necessary to pass the newly added spec. You just keep adding specs until your code is feature complete.
 * More handy features
     * Some matchers
     * Spies
