@@ -128,6 +128,33 @@ describe("Addition function", function() {
     </article>
   </slide>
 
+  <slide>
+    <hgroup>
+      <h2>What a Jasmine Suite Looks Like</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>At least one <code>describe</code> block (they can be nested)</li>
+        <li>At least one <code>it</code> block which contains a spec</li>
+        <li>At least one expectation, which consists of:
+          <ul class="build">
+            <li><code>expect</code> which is passed an expression (called the "actual" value)</li>
+            <li>A matcher with the expected value (<code>toBe</code> and <code>toBeGreaterThan</code>)</li>
+          </ul>
+      </ul>
+      <pre class="prettyprint" data-lang="javascript">
+describe("Calculator", function() {
+  describe("Addition function", function() {
+    it("should add numbers", function() {
+      expect(add(1, 1)).toBe(2);
+      expect(add(2, 2)).toBeGreaterThan(3);
+    });
+  });
+});
+</pre>
+    </article>
+  </slide>
+
   <!-- EXAMPLES FOLLOW -->
 
   <slide class="logoslide nobackground">
