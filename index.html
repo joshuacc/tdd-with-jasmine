@@ -27,7 +27,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slides class="layout-widescreen">
 
   <slide class="title-slide segue nobackground">
-    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <aside class="gdbar"><img src="images/jasmine-logo.png"></aside>
     <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
@@ -179,6 +179,333 @@ describe("Calculator", function() {
   </slide>
 
   <slide class="fill nobackground" style="background-image: url(images/specrunner.png)">
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/jasmine-logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Using Jasmine</h2>
+      <h3>The Test-Driven Way</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>The Plan</h2>
+    </hgroup>
+    <article>
+      <p>We're going to write a mini string library which has the following function.</p>
+      <ol class="build">
+        <li>A "first word" function which returns the first word of a string.</li>
+      </ol>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>First we describe it</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>We're testing the <code>stringUtil</code> library.</li>
+        <li>Specifically we're testing the <code>firstWord</code> function.</li>
+      </ul>
+      <pre class="prettyprint" data-lang="javascript">
+describe("stringUtil", function() {
+  describe("firstWord", function() {
+    // Specs go here.
+  });
+});
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Then we spec it</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+describe("stringUtil", function() {
+  describe("firstWord", function() {
+    <b>it("should return the first word of a string", function () {
+      expect(stringUtil.firstWord("one two")).toBe("one");
+    });</b>
+  });
+});
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Then we run the specs</h2>
+    </hgroup>
+    <article>
+      <img src="images/failing1.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <img src="images/success-kid.jpg" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Confused?</h2>
+      <h3>Remember the TDD process.</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><span class="red">Red</span> -> <span class="green">Green</span> -> <span class="blue">Refactor</span></li>
+        <li>If you don't get red after writing your specs first, then there is something wrong with your specs.</li>
+        <li>Basically, that first <span class="red">red</span> means you're doing the right thing.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Back to that failure</h2>
+      <h3><code>stringUtil</code> isn't defined.</h3>
+    </hgroup>
+    <article>
+      <img src="images/failing1.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>So let's define it</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+var stringUtil = {};
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Now we get a different error</h2>
+      <h3><code>stringUtil</code> doesn't have a <code>firstWord</code> method</h3>
+    </hgroup>
+    <article>
+      <img src="images/failing2.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Let's fix that</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+var stringUtil = {
+  <b>firstWord: function() {
+    // Not doing anything yet.
+  }</b>
+};
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Our function isn't returning anything</h2>
+    </hgroup>
+    <article>
+      <img src="images/failing3.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Now for some actual logic</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+var stringUtil = {
+  firstWord: <b>function(text) {
+    var textWords = text.split(" ");
+    return textWords[0];
+  }</b>
+};
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>We got to <span class="green">green</span>!</h2>
+    </hgroup>
+    <article>
+      <img src="images/passing1.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>But that code wasn't the greatest</h2>
+      <h3>Time to <span class="blue">refactor</span></h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+var stringUtil = {
+  firstWord: function(text) {
+    <b>return text.split(" ")[0];</b>
+  }
+};
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2><span class="green">Green</span> again!</h2>
+    </hgroup>
+    <article>
+      <img src="images/passing1.png" />
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>So why go through all that?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Leads to better code design by encouraging smaller units of code which you can combine to achieve your larger goals.</li>
+        <li>Having tests/specs lets you refactor with confidence.</li>
+        <li>Writing the specs first means that they are going to be more complete, so you can have more confidence in them.</li>
+        <li>The more confidence you have in your tests/specs, the faster you can improve your existing code.</li>
+        <li>Obviously, the bigger and more important a system you're building, the more helpful these techniques will be.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/jasmine-logo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Enough TDD stuff</h2>
+      <h3>Let's talk more about Jasmine</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Lots of matchers available</h2>
+    </hgroup>
+    <article>
+      <table>
+        <tr>
+          <th>Matcher</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>toBe</td>
+          <td>Compares actual and expected with <code>===</code></td>
+        </tr>
+        <tr>
+          <td>toEqual</td>
+          <td>Compares simple object literals that <code>===</code> cannot</td>
+        </tr>
+        <tr>
+          <td>toMatch</td>
+          <td>Compares actual value against a regular expression</td>
+        </tr>
+        <tr>
+          <td>toBeDefined</td>
+          <td>Checks to see if the actual value is defined</td>
+        </tr>
+        <tr>
+          <td>toBeUndefined</td>
+          <td>Checks to see if the actual value is undefined</td>
+        </tr>
+        <tr>
+          <td>toBeNull</td>
+          <td>Checks to see if the actual value is null</td>
+        </tr>
+        <tr>
+          <td>toBeTruthy</td>
+          <td>Checks to see if the actual value coerces to <code>true</true></td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>More matchers</h2>
+    </hgroup>
+    <article>
+      <table>
+        <tr>
+          <th>Matcher</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>toBeFalsy</td>
+          <td>Checks to see if the actual value coerces to <code>false</true></td>
+        </tr>
+        <tr>
+          <td>toContain</td>
+          <td>Checks to see if an array contains the expected value</td>
+        </tr>
+        <tr>
+          <td>toBeLessThan</td>
+          <td>Self-explanatory</td>
+        </tr>
+        <tr>
+          <td>toBeGreaterThan</td>
+          <td>Self-explanatory</td>
+        </tr>
+        <tr>
+          <td>toBeCloseTo</td>
+          <td>For precision math comparisons on floating point numbers</td>
+        </tr>
+        <tr>
+          <td>toThrow</td>
+          <td>Checks to see if an error is thrown</td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>And those are the built-ins</h2>
+      <h3>There are Jasmine plugins as well</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          <b>Jasmine jQuery:</b><br />
+          Provides matchers for jQuery objects, and an easy way to build HTML fixtures to test with.
+        </li>
+        <li>
+          <b>Underscore Matchers for Jasmine:</b><br />
+          Provides more matchers based on the methods in Underscore.js
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>You can also write your own</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+this.addMatchers({
+  toEndWith: function(expected) {
+    return this.actual[this.actual.length - 1] === expected;
+  }
+});
+</pre>
+    </article>
   </slide>
 
   <!-- EXAMPLES FOLLOW -->

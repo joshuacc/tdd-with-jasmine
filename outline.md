@@ -39,17 +39,6 @@ Note: Make sure that I have an empty Sublime window open in case someone asks a 
     * Green
     * Refactor
     * Successful refactoring
-* Let's do that again
-    * The plan
-    * Add a new describe block
-    * Write the spec
-    * Red (Red is good)
-    * Write the code
-    * Oops. Still red.
-    * Fix the code.
-    * Green.
-    * Refactor.
-    * Green. Successful refactor.
 * Why TDD? (Instead of writing tests afterward?)
     * Writing tests beforehand forces you to think through how you want your code to behave before you start writing it.
     * Leads to better code design by encouraging smaller pieces of code which you can combine to achieve your larger goals.
