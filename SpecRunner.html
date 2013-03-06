@@ -13,7 +13,11 @@
   <script>
     var stringUtil = {
       firstWord: function(text) {
-        return text.split(" ")[0];
+        return this.nthWord(text, 1);
+      },
+
+      nthWord: function(text, i) {
+        return text.split(" ")[i - 1];
       }
     };
   </script>
@@ -24,6 +28,20 @@
       describe("firstWord", function() {
         it("should return the first word of a string", function () {
           expect(stringUtil.firstWord("one two")).toBe("one");
+        });
+
+        it("should delegate its logic to nthWord", function () {
+          spyOn(stringUtil, "nthWord");
+          stringUtil.firstWord("one two");
+
+          expect(stringUtil.nthWord).toHaveBeenCalled();
+        });
+      });
+
+      describe("nthWord", function() {
+        it("should return the nth word of a string", function () {
+          expect(stringUtil.nthWord("one two", 1)).toBe("one");
+          expect(stringUtil.nthWord("one two", 2)).toBe("two");
         });
       });
     });
