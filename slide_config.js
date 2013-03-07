@@ -23,13 +23,6 @@ var SLIDE_CONFIG = {
     twitter: '@joshuacc',
     www: 'http://designpepper.com',
     github: 'http://github.com/joshuacc'
-  }/*, {
-    name: 'Second Name',
-    company: 'Job Title, Google',
-    gplus: 'http://plus.google.com/1234567890',
-    twitter: '@yourhandle',
-    www: 'http://www.you.com',
-    github: 'http://github.com/you'
-  }*/]
+  }]
 };
 
